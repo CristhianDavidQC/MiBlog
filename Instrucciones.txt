@@ -1,0 +1,41 @@
+Crear Proyecto MiBlogFullStack
+
+PRIMERO DEBEMOS DE ARRANCAR NUESTRO PROYECTO LARAVEL 
+DENTRO DE LA CARPETA WWW NO CREAR OTRA CARPETA ANTES
+CON..
+
+- composer create-project laravel/laravel:^10.0 "NOMBreProyectoSincomillas"
+Entramos a la carpeta creada en eeste caso "NOMBreProyectoSincomillas"
+
+Instalamos los paquetes de que nos dan las vistas y controladores para autenticacion de ususarios y registros y recuperacion de contraseñas
+-  composer require laravel/ui
+
+Luego instalamos artisan ui bootstrap
+SI PIDE REEMPLAZAR LE DAMOS EN SI
+-php artisan ui bootstrap --auth
+
+
+Instalamos el paquete de idioma Español
+- composer require laravels/spanish
+Actualizamos las traducciones con el siquiente comando
+
+-php artisan laraveles:install-lang
+
+hacemos los siquientes cambios en la carpeta config y el archivo app.php
+
+'timezone' => 'America\La_Paz',  ---linea 72 Para Bolivia
+'locale' => 'es',     -----linea 85
+
+Luego instalamos lo que equivale a liveServer podemos obiar mpm run dev
+- npm install && mpm run dev
+En vez de npm run dev podemos poner npm run build
+
+para terminar de hacer todos los cambios sobre el idioma debemos de entrar en 
+la carpeta de resources--views-- auth y corregimos en el register.blade.php
+y cambiar en la linea 15 para que quede ASI E-Mail Address y en el login.blade.php
+enla linea 29 E-Mail Address
+ f4-$ nos importa el cdn de fontAwesome
+AHORA GESTIONAMOS LA AUTENTICACIONEN BASE A LARAVEL
+
+Para volver a correr si es que hay errore se puede poner lo de abajo para borrar cache
+php artisan optimize:clear

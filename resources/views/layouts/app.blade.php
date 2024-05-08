@@ -14,11 +14,11 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- adminLTE -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 </head>
 
 <body class="sidebar-mini layout-fixed" style="height: auto;"> <!--layout-fixed en vez de sidebar.collapse-->
@@ -191,7 +191,7 @@
                                 </ul>
                             </li> --}}
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ url('/categorias') }}" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Categorias

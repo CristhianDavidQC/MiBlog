@@ -21,3 +21,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//categorias
+Route::get('/categorias', [App\Http\Controllers\CategoriasController::class, 'index']);
+Route::get('/categorias/registrar', [App\Http\Controllers\CategoriasController::class, 'create']);
+Route::post('/categorias/registrar/', [App\Http\Controllers\CategoriasController::class, 'store']);
+//actualizar
+Route::get('/categorias/actualizar/{id}', [App\Http\Controllers\CategoriasController::class, 'edit']);
+//update
+Route::put('/categorias/actualizar/{id}', [App\Http\Controllers\CategoriasController::class, 'update']);
+//cambiar estado
+Route::get('/categorias/estado/{id}', [App\Http\Controllers\CategoriasController::class, 'estado']);
+
+
+
+
+
