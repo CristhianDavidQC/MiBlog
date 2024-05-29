@@ -13,6 +13,7 @@ class CategoriasController extends Controller
     public function index()
     {
         //nos servirá para listar
+         //traemos a todas las cotegoris con su relacionUsuario, ordenado descendentemente y una paginacion de 10
         $categorias = Categorias::with('relacionUsuario')->orderBy('id', 'DESC')->paginate(10); //creamos la tabla y abajo la mostramos
         //dd($categorias);
         return view ('categorias.index', compact('categorias'));
@@ -44,7 +45,7 @@ class CategoriasController extends Controller
             //si existe, debo de obtener esa imagen, instancio la imagen
             $imagen = $request->file('imagen');
             //creo un nombre de archivo, debo de tener un identificador único
-            //ponderemos el nombre de la categoria mas una linea temporal
+            //pondremos el nombre de la categoria mas una linea temporal
             $nombreImagen = uniqid('categoria_').'.png';
             //mover este archivo a la siguiente direccion
             $subido = $imagen->move(public_path().'/imagenes/categorias/', $nombreImagen);
@@ -90,7 +91,8 @@ class CategoriasController extends Controller
     {
         //validamos las columnas necesarias de categorias
         $this->validate($request,[
-            'nombre' => 'required|unique:categorias,nombre,'.$id, //es requerido y debe ser unico en la tabla categorias
+            //nombre es requerido y debe ser unico en la tabla categorias en la columna nombre
+            'nombre' => 'required|unique:categorias,nombre,'.$id,
             'imagen'=> 'nullable|image|mimes:png,jpg,jpeg', //puede ser nula y debe ser de tipo imagen
 
         ]);
@@ -99,7 +101,7 @@ class CategoriasController extends Controller
         //debemos de subir la imagen a nuestro servidor, preguntando antes si existe
         if($request->file('imagen')){ //si la imagen es un archivo
             // elliminar el anterior
-            if($categoria->imagen!='default.png'){
+            if($categoria->imagen !='default.png'){
                 if(file_exists(public_path().'/imagenes/categorias/'.$categoria->imagen)){
                     //unlik sirve para borrar la ruta
                     unlink(public_path().'/imagenes/categorias/'.$categoria->imagen);
@@ -113,11 +115,11 @@ class CategoriasController extends Controller
             $nombreImagen = uniqid('categoria_').'.png';
             //mover este archivo a la siguiente direccion
             $subido = $imagen->move(public_path().'/imagenes/categorias/', $nombreImagen);
+            $categoria->imagen = $nombreImagen;
         }
 
         //ahora instanciamos al modelo categorias en la variables categoria
         $categoria->nombre = $request->nombre;
-        $categoria->imagen = $nombreImagen;
         $categoria->estado = true;
         $categoria->usuario_id = auth()->user()->id;
 
@@ -137,9 +139,9 @@ class CategoriasController extends Controller
         $categoria->estado = !$categoria->estado;
 
         if($categoria->save()){
-            return redirect('/categorias')->with('success', 'Registro Actualizado Correctamente');
+            return redirect('/categorias')->with('success', 'Estado Actualizado Correctamente');
         }else{
-            return back()->whit('error', 'El registro no fue actualizado');
+            return back()->whit('error', 'El estado no fue actualizado');
         }
     }
 }

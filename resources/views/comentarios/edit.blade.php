@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Nueva Categorias</h1>
+                <h1 class="m-0">Comentarios</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio </a></li>
-                    <li class="breadcrumb-item active">Categorias</li>
+                    <li class="breadcrumb-item active">Tags</li>
                 </ol>
             </div>
         </div>
@@ -28,24 +28,20 @@
                         @include('includes.alertas')  <!--incluye desde la carpera includes-->
 
                         <!--Cuando enviamos imagenes debemos de añadir     endtype="multipart/form-data"  igual pasa en VUE-->
-                        <form action="{{ url('/categorias/registrar')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('/comentarios/actualizar/'.$comentario->id)}}" method="POST">
+                            @method('PUT')
                             @csrf
                             <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" value="{{ old('nombre') }}" class="form-control">
-                                @error('nombre') <small class="text-danger">{{$message}}</small> <!--validacion de que este campo no este vacio-->
+                                <label for="comentario">Comentario</label>
+                                <textarea name="comentario" cols="30" rows="2" class="form-control">{{ $comentario->comentario }}</textarea>
+                                <!--validacion de que este campo no este vacio-->
+                                @error('comentario') <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="imagen">Imagen</label>
-                                <!--Los inputs de tipo file son para las imagenes-->
-                                <input type="file" name="imagen" value="{{old('imagen')}}" class="form-control">
-                                @error('imagen') <small class="text-danger">{{$message}}</small>
-                                @enderror
-                            </div>
+
                             <div class="text-center">
-                                <a href="{{ url('/categorias')}}" class="btn btn-primary ">Volver al Listado</a>
-                                <button class="btn btn-success" type="submit">Registrar</button>
+                                <a href="{{ url('/comentarios')}}" class="btn btn-primary ">Ir al Listado</a>
+                                <button class="btn btn-success" type="submit">Actualizar</button>
                             </div>
                         </form>
                     </div>

@@ -19,6 +19,17 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+    <style>
+        /* select-from-files es un campo que muestra en las opcione de cargar archivo de subir vireo e imagen
+        con el css de abajo ya no mostrará esos campos*/
+        .note-group-select-from-files {
+            display:none
+        }
+    </style>
 </head>
 
 <body class="sidebar-mini layout-fixed" style="height: auto;"> <!--layout-fixed en vez de sidebar.collapse-->
@@ -191,7 +202,7 @@
                                 </ul>
                             </li> --}}
                             <li class="nav-item">
-                                <a href="{{ url('/categorias') }}" class="nav-link">
+                                <a href="{{ url('/categorias') }}" class="nav-link {{ (request()->is('categorias*'))? 'active':''}}">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Categorias
@@ -200,7 +211,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ url('/tags') }}" class="nav-link {{ (request()->is('tags*'))? 'active':''}}">
                                     <i class="nav-icon fa fa-hashtag"></i>
                                     <p>
                                         Tags
@@ -208,15 +219,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ url('/posts') }}" class="nav-link {{ (request()->is('posts*'))? 'active':''}}">
                                     <i class="nav-icon fas fa-list"></i>
                                     <p>
-                                        Blogs
+                                        Posts
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ url('/comentarios') }}" class="nav-link {{ (request()->is('comentarios*'))? 'active':''}}">
                                     <i class="nav-icon fas fa-comments"></i>
                                     <p>
                                         Comentarios
@@ -224,7 +235,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href=" {{ url('/usuarios') }}" class="nav-link {{ (request()->is('usuarios*'))? 'active':''}}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         Usuarios
@@ -259,6 +270,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    {{-- para que el codigo java script que yo escriba este debajo de los librerias que voy a utilizar --}}
+    @yield('scripts')
 </body>
 
 </html>
